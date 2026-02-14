@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import logo from "./assets/VisionX-Logo.png";
-
+import logo from "./assets/logo.png";
 // ✅ Case Study Images (assets me rakhna)
 import caseGmb from "./assets/case_gmb.png";
 import caseInsta from "./assets/case_instagram.png";
