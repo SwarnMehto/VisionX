@@ -179,7 +179,7 @@ export default function App() {
         <div className="pointer-events-none absolute inset-0 opacity-25">
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.09)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.09)_1px,transparent_1px)] bg-[size:48px_48px]" />
         </div>
-
+      
         {/* Glow */}
         <div className="pointer-events-none absolute -top-32 left-1/2 h-80 w-[48rem] -translate-x-1/2 rounded-full bg-yellow-500/15 blur-3xl" />
 
@@ -211,7 +211,7 @@ export default function App() {
                   href="#work"
                   className="rounded-2xl border border-zinc-700 px-5 py-3 text-sm font-semibold text-zinc-100 hover:border-zinc-500"
                 >
-                  View Case Studies
+                  Our Projects & Success
                 </a>
               </div>
 
@@ -337,148 +337,276 @@ export default function App() {
         </div>
       </section>
 
-      {/* Work / Case Studies */}
-      <section id="work" className="mx-auto max-w-6xl px-4 py-14">
-        <h2 className="text-2xl font-bold md:text-3xl">Case Studies</h2>
-        <p className="mt-2 text-zinc-300">
-          Real work I do for clients: GMB SEO, Instagram handling, and YouTube management.
+      {/* Our Clients */}
+<section className="mx-auto max-w-6xl px-4 py-14">
+  <h2 className="text-2xl font-bold md:text-3xl">
+    Trusted By Businesses
+  </h2>
+
+  <p className="mt-2 text-zinc-300">
+    Worked with growing brands across entertainment,
+    education, technology and service industries.
+  </p>
+
+  <div className="mt-8 grid gap-4 md:grid-cols-3">
+    {[
+      {
+        name: "Gem Tunes",
+        work: "YouTube Content Operations, Upload Management, Metadata Optimization",
+      },
+      {
+        name: "Gem Records",
+        work: "Content Management & Digital Publishing",
+      },
+      {
+        name: "Blue Moon Animation",
+        work: "Digital Content Support & Channel Operations",
+      },
+      {
+        name: "LIPMT",
+        work: "Website & Digital Presence Support",
+      },
+      {
+        name: "Crystal Smart Solution",
+        work: "Business Website & Digital Services",
+      },
+      {
+        name: "Unity Lift Solution",
+        work: "Website & Lead Generation Support",
+      },
+    ].map((client) => (
+      <div
+        key={client.name}
+        className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-6"
+      >
+        <h3 className="text-xl font-semibold text-yellow-400">
+          {client.name}
+        </h3>
+
+        <p className="mt-3 text-sm text-zinc-300">
+          {client.work}
         </p>
+      </div>
+    ))}
+  </div>
+</section>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-2">
-          {/* Case 1 */}
-          <div className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-6">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-zinc-400">Gym • Google Business Profile</div>
-              <div className="rounded-full border border-yellow-500/25 bg-yellow-500/10 px-3 py-1 text-xs text-yellow-200">
-                GMB SEO
-              </div>
-            </div>
+      {/* =======================================================
+PROJECTS & CLIENT SUCCESS
+======================================================= */}
 
-            <img
-              src={caseGmb}
-              alt="GMB Case Study"
-              className="mt-3 aspect-video w-full rounded-2xl object-cover border border-white/10"
-              loading="lazy"
-            />
+<section id="work" className="mx-auto max-w-7xl px-4 py-20">
+  <div className="text-center">
+    <h2 className="text-3xl md:text-5xl font-bold">
+      Projects & Client Success
+    </h2>
 
-            <h3 className="mt-4 text-lg font-semibold">Gym Growth via GMB Optimization</h3>
 
-            <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-300">
-              <li>Profile optimization: categories, services, keywords, and business info</li>
-              <li>Weekly posts + photo updates for freshness</li>
-              <li>Review strategy + professional replies</li>
-              <li>Competitor analysis + local ranking improvements</li>
-            </ul>
-          </div>
+<p className="mt-4 max-w-3xl mx-auto text-zinc-300">
+  Delivering digital growth solutions across content management,
+  YouTube operations, website development, branding, SEO,
+  automation and business growth strategies.
+</p>
 
-          {/* Case 2 */}
-          <div className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-6">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-zinc-400">Gym • Instagram Management</div>
-              <div className="rounded-full border border-yellow-500/25 bg-yellow-500/10 px-3 py-1 text-xs text-yellow-200">
-                Social Growth
-              </div>
-            </div>
 
-            <img
-              src={caseInsta}
-              alt="Instagram Case Study"
-              className="mt-3 aspect-video w-full rounded-2xl object-cover border border-white/10"
-              loading="lazy"
-            />
+  </div>
 
-            <h3 className="mt-4 text-lg font-semibold">Instagram Reels + Content Handling</h3>
+{/* ================= CLIENTS ================= */}
 
-            <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-300">
-              <li>Reels strategy: hooks, captions, trending audio, and CTA</li>
-              <li>Posting schedule + story highlights setup</li>
-              <li>Professional design: posters, offers, transformations</li>
-              <li>Engagement: comments & DM response support</li>
-            </ul>
-          </div>
+  {/* <div className="mt-16">
+    <h3 className="text-2xl font-semibold text-center">
+      Brands We Have Worked With
+    </h3>
 
-          {/* Case 3 */}
-          <div className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-6 md:col-span-2">
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-zinc-400">YouTube • Channel Management</div>
-              <div className="rounded-full border border-yellow-500/25 bg-yellow-500/10 px-3 py-1 text-xs text-yellow-200">
-                Since last month
-              </div>
-            </div>
 
-            <div className="mt-3 grid gap-4 md:grid-cols-2">
-              <img
-                src={caseYt1}
-                alt="YouTube Case Study 1"
-                className="aspect-video w-full rounded-2xl object-cover border border-white/10"
-                loading="lazy"
-              />
-              {/* ✅ Same image use kiya (caseYt2 error fix) */}
-              <img
-                src={caseYt1}
-                alt="YouTube Case Study 2"
-                className="aspect-video w-full rounded-2xl object-cover border border-white/10"
-                loading="lazy"
-              />
-            </div>
+<div className="mt-8 grid gap-4 md:grid-cols-3">
+  {[
+    "Gem Tunes",
+    "Gem Records",
+    "Blue Moon Animation",
+    "LIPMT",
+    "Crystal Smart Solution",
+    "Unity Lift Solution",
+  ].map((brand) => (
+    <div
+      key={brand}
+      className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-6 text-center hover:border-yellow-500/40 transition"
+    >
+      <h4 className="text-xl font-semibold text-yellow-400">
+        {brand}
+      </h4>
+    </div>
+  ))}
+</div>
 
-            <h3 className="mt-4 text-lg font-semibold">YouTube Uploads + SEO + Thumbnails</h3>
 
-            <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-zinc-300">
-              <li>Video uploading + titles, tags, descriptions (SEO)</li>
-              <li>Thumbnail design + branding consistency</li>
-              <li>Playlist organization + channel optimization</li>
-              <li>Weekly performance tracking (views, CTR, retention)</li>
-            </ul>
+  </div> */}
 
-            <div
-              ref={growthRef}
-              className="mt-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl shadow-[0_0_25px_rgba(234,179,8,0.18)]"
-            >
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-                <div>
-                  <div className="text-sm text-zinc-300">Subscriber Growth</div>
-                  <div className="mt-1 text-xl font-semibold">0 → 100K Subscribers</div>
-                </div>
+{/* ================= PROJECTS ================= */}
 
-                <div className="text-sm text-zinc-300">
-                  <span className="font-semibold text-yellow-300">
-                    {countSubs.toLocaleString()}
-                  </span>{" "}
-                  / {targetSubs.toLocaleString()} •{" "}
-                  <span className="text-yellow-300">{progress}%</span>
-                </div>
-              </div>
+  <div className="mt-20 grid gap-6 md:grid-cols-2">
 
-              <div className="mt-4 h-3 w-full overflow-hidden rounded-full bg-zinc-800/70">
-                <div
-                  className="h-full rounded-full bg-yellow-500 transition-[width] duration-[1200ms] ease-out"
-                  style={{ width: `${growthOn ? progress : 0}%` }}
-                />
-              </div>
 
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <div className="text-xs text-zinc-400">Last 28 days</div>
-                  <div className="mt-1 text-lg font-semibold text-white">69.0K Views</div>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <div className="text-xs text-zinc-400">Watch time</div>
-                  <div className="mt-1 text-lg font-semibold text-white">442 hrs</div>
-                </div>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                  <div className="text-xs text-zinc-400">New subs</div>
-                  <div className="mt-1 text-lg font-semibold text-white">+5.1K</div>
-                </div>
-              </div>
+{/* PROJECT 1 */}
+<div className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-8">
+  <div className="flex justify-between items-center">
+    <span className="text-zinc-400 text-sm">
+      Digital Marketing & Local SEO
+    </span>
 
-              <p className="mt-4 text-sm text-zinc-300">
-                Scroll-triggered proof section. Replace numbers with your exact analytics screenshots.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+    <span className="rounded-full bg-yellow-500/10 border border-yellow-500/30 px-3 py-1 text-xs text-yellow-300">
+      Business Growth
+    </span>
+  </div>
+
+  <h3 className="mt-4 text-2xl font-semibold">
+    Google Business Profile Optimization
+  </h3>
+
+  <p className="mt-3 text-zinc-300">
+    Improved local visibility and customer engagement through
+    profile optimization, local SEO implementation and review management.
+  </p>
+
+  <ul className="mt-5 space-y-2 text-sm text-zinc-300">
+    <li>✓ Google Business Profile Optimization</li>
+    <li>✓ Local SEO Strategy</li>
+    <li>✓ Review Management</li>
+    <li>✓ Competitor Analysis</li>
+    <li>✓ Weekly Posts & Updates</li>
+  </ul>
+</div>
+
+{/* PROJECT 2 */}
+<div className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-8">
+  <div className="flex justify-between items-center">
+    <span className="text-zinc-400 text-sm">
+      Social Media Management
+    </span>
+
+    <span className="rounded-full bg-yellow-500/10 border border-yellow-500/30 px-3 py-1 text-xs text-yellow-300">
+      Brand Growth
+    </span>
+  </div>
+
+  <h3 className="mt-4 text-2xl font-semibold">
+    Social Media Growth Management
+  </h3>
+
+  <p className="mt-3 text-zinc-300">
+    Strategic content planning, reels creation, audience engagement
+    and consistent branding across social platforms.
+  </p>
+
+  <ul className="mt-5 space-y-2 text-sm text-zinc-300">
+    <li>✓ Content Strategy</li>
+    <li>✓ Reels & Short Form Content</li>
+    <li>✓ Creative Design Support</li>
+    <li>✓ Audience Engagement</li>
+    <li>✓ Monthly Performance Tracking</li>
+  </ul>
+</div>
+
+{/* PROJECT 3 */}
+<div className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-8">
+  <div className="flex justify-between items-center">
+    <span className="text-zinc-400 text-sm">
+      YouTube Management
+    </span>
+
+    <span className="rounded-full bg-yellow-500/10 border border-yellow-500/30 px-3 py-1 text-xs text-yellow-300">
+      Content Operations
+    </span>
+  </div>
+
+  <h3 className="mt-4 text-2xl font-semibold">
+    YouTube Channel Operations & SEO
+  </h3>
+
+  <p className="mt-3 text-zinc-300">
+    Managing large-scale YouTube publishing workflows,
+    metadata optimization and channel performance growth.
+  </p>
+
+  <ul className="mt-5 space-y-2 text-sm text-zinc-300">
+    <li>✓ Video Publishing</li>
+    <li>✓ SEO Titles & Descriptions</li>
+    <li>✓ Thumbnail Optimization</li>
+    <li>✓ Playlist Management</li>
+    <li>✓ Analytics & Performance Tracking</li>
+  </ul>
+</div>
+
+{/* PROJECT 4 */}
+<div className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-8">
+  <div className="flex justify-between items-center">
+    <span className="text-zinc-400 text-sm">
+      Software Development
+    </span>
+
+    <span className="rounded-full bg-yellow-500/10 border border-yellow-500/30 px-3 py-1 text-xs text-yellow-300">
+      Automation
+    </span>
+  </div>
+
+  <h3 className="mt-4 text-2xl font-semibold">
+    Bulk Reminder Management System
+  </h3>
+
+  <p className="mt-3 text-zinc-300">
+    Custom software solution designed to automate reminders,
+    customer communication and campaign management.
+  </p>
+
+  <ul className="mt-5 space-y-2 text-sm text-zinc-300">
+    <li>✓ Campaign Management</li>
+    <li>✓ CSV Upload System</li>
+    <li>✓ Customer Database</li>
+    <li>✓ Automated Reminder Flow</li>
+    <li>✓ Reporting Dashboard</li>
+  </ul>
+</div>
+
+
+  </div>
+
+{/* ================= STATS ================= */}
+
+  <div className="mt-20 grid gap-4 md:grid-cols-4">
+
+
+<div className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-6 text-center">
+  <div className="text-4xl font-bold text-yellow-400">6+</div>
+  <div className="mt-2 text-sm text-zinc-400">
+    Brands Worked With
+  </div>
+</div>
+
+<div className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-6 text-center">
+  <div className="text-4xl font-bold text-yellow-400">4+</div>
+  <div className="mt-2 text-sm text-zinc-400">
+    Years Experience
+  </div>
+</div>
+
+<div className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-6 text-center">
+  <div className="text-4xl font-bold text-yellow-400">1000+</div>
+  <div className="mt-2 text-sm text-zinc-400">
+    Content Assets Managed
+  </div>
+</div>
+
+<div className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-6 text-center">
+  <div className="text-4xl font-bold text-yellow-400">100%</div>
+  <div className="mt-2 text-sm text-zinc-400">
+    Dedicated Support
+  </div>
+</div>
+
+
+  </div>
+</section>
+
 
       {/* Pricing */}
       <section id="pricing" className="mx-auto max-w-6xl px-4 py-14">
@@ -487,9 +615,9 @@ export default function App() {
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {[
-            ["Starter", "₹3000/mo", ["8 posts", "4 reels", "Captions + hashtags", "Basic reporting"]],
-            ["Growth", "₹7000/mo", ["12 posts", "8 reels", "Google profile optimization", "Monthly strategy call"]],
-            ["Premium", "₹12000/mo", ["20 posts", "12 reels", "Ads setup + funnel", "Lead tracking support"]],
+            ["Starter", "₹3500/mo", ["8 posts", "4 reels", "Captions + hashtags", "Basic reporting"]],
+            ["Growth", "₹8000/mo", ["12 posts", "8 reels", "Google profile optimization", "On Page SEO", "Off Page SEO", "Monthly Reports"]],
+            ["Premium", "₹12000/mo", ["20 posts", "12 reels", "Ads setup + funnel", "On Page SEO", "Off Page SEO","GEO Targeting","Backlinks", "Weekly Reports"]],
           ].map(([name, price, items]) => (
             <div key={name} className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-6">
               <div className="text-sm text-zinc-300">{name}</div>
