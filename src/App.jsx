@@ -615,9 +615,9 @@ PROJECTS & CLIENT SUCCESS
 
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {[
-            ["Starter", "₹3500/mo", ["8 posts", "4 reels", "Captions + hashtags", "Basic reporting"]],
-            ["Growth", "₹8000/mo", ["12 posts", "8 reels", "Google profile optimization", "On Page SEO", "Off Page SEO", "Monthly Reports"]],
-            ["Premium", "₹12000/mo", ["20 posts", "12 reels", "Ads setup + funnel", "On Page SEO", "Off Page SEO","GEO Targeting","Backlinks", "Weekly Reports"]],
+            ["Starter", "₹8500/mo", ["8 posts", "4 reels", "Captions + hashtags", "Basic reporting"]],
+            ["Growth", "₹10500/mo", ["10 posts", "8 reels", "Google profile optimization", "On Page SEO", "Off Page SEO", "Monthly Reports"]],
+            ["Premium", "₹18500/mo", ["20 posts", "15 reels", "Ads setup + funnel", "On Page SEO", "Off Page SEO","GEO Targeting","Backlinks", "Weekly Reports"]],
           ].map(([name, price, items]) => (
             <div key={name} className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-6">
               <div className="text-sm text-zinc-300">{name}</div>
