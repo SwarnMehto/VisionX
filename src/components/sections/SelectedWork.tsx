@@ -89,11 +89,13 @@ function ProjectVisual({
   number,
   logo,
   client,
+  href,
 }: {
   type: string
   number: string
   logo: string
   client: string
+  href: string
 }) {
   return (
     <div className="absolute inset-0 overflow-hidden">
@@ -183,9 +185,13 @@ function ProjectVisual({
         />
       </div>
 
-      <div className="absolute left-1/2 top-1/2 z-10 flex h-36 w-52 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-white/10 bg-black/45 p-5 shadow-2xl backdrop-blur-md transition-transform duration-700 group-hover:scale-105 md:h-44 md:w-64">
+      <Link
+        to={href}
+        aria-label={`View ${client} project`}
+        className="absolute left-1/2 top-1/2 z-10 flex h-36 w-52 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-white/10 bg-black/45 p-5 shadow-2xl backdrop-blur-md transition-transform duration-700 group-hover:scale-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-200 md:h-44 md:w-64"
+      >
         <img src={logo} width="256" height="176" alt={`${client} logo`} loading="lazy" className="max-h-full max-w-full object-contain transition-transform duration-700 group-hover:scale-110" />
-      </div>
+      </Link>
 
       {/* =========================================================
           ORBIT DOTS
@@ -344,6 +350,7 @@ function SelectedWork() {
                 number={project.number}
                 logo={project.logo}
                 client={project.client}
+                href={`/work/${project.slug}`}
               />
 
               {/* =====================================================

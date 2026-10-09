@@ -18,29 +18,52 @@ function ViewportGate({ children, className = '' }: ViewportGateProps) {
       connection?: { saveData?: boolean }
       deviceMemory?: number
     }
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const smallScreen = window.matchMedia('(max-width: 767px)').matches
-    const lowMemory = (device.deviceMemory ?? 8) <= 4
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const screenPreference = window.matchMedia('(max-width: 767px)')
+    let timeout = 0
+    let observer: IntersectionObserver | null = null
 
-    if (prefersReducedMotion || smallScreen || lowMemory || device.connection?.saveData) return
-
-    const bounds = container.getBoundingClientRect()
-    if (bounds.top < window.innerHeight && bounds.bottom > 0) {
-      const timeout = window.setTimeout(() => setIsReady(true), 350)
-      return () => window.clearTimeout(timeout)
+    const disconnectObserver = () => {
+      observer?.disconnect()
+      observer = null
     }
 
-    let timeout = 0
-    const observer = new IntersectionObserver(([entry]) => {
-      if (!entry.isIntersecting) return
+    const evaluateScene = () => {
+      window.clearTimeout(timeout)
+      disconnectObserver()
 
-      observer.disconnect()
-      timeout = window.setTimeout(() => setIsReady(true), 350)
-    }, { rootMargin: '120px' })
+      if (motionPreference.matches || screenPreference.matches || (device.deviceMemory ?? 8) <= 4 || device.connection?.saveData) {
+        setIsReady(false)
+        return
+      }
 
-    observer.observe(container)
+      const activate = () => {
+        disconnectObserver()
+        timeout = window.setTimeout(() => setIsReady(true), 350)
+      }
+      const bounds = container.getBoundingClientRect()
+
+      if (bounds.top < window.innerHeight + 120 && bounds.bottom > -120) {
+        activate()
+        return
+      }
+
+      observer = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) activate()
+      }, { rootMargin: '120px' })
+      observer.observe(container)
+    }
+
+    evaluateScene()
+    window.addEventListener('resize', evaluateScene, { passive: true })
+    motionPreference.addEventListener('change', evaluateScene)
+    screenPreference.addEventListener('change', evaluateScene)
+
     return () => {
-      observer.disconnect()
+      window.removeEventListener('resize', evaluateScene)
+      motionPreference.removeEventListener('change', evaluateScene)
+      screenPreference.removeEventListener('change', evaluateScene)
+      disconnectObserver()
       window.clearTimeout(timeout)
     }
   }, [])

@@ -219,7 +219,7 @@ function ServicesShowcase() {
               duration: 0.7,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="relative"
+            className="relative min-w-0"
           >
             <div className="sticky top-32">
               <div className="mb-4 flex items-center justify-between">
@@ -335,7 +335,7 @@ function ServicesShowcase() {
               duration: 0.7,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="capability-display relative min-h-[520px] overflow-hidden"
+            className="capability-display relative min-h-[520px] min-w-0 overflow-hidden"
           >
             {/* Scan lines */}
 
@@ -574,19 +574,6 @@ function ServicesShowcase() {
                 CORE
               </span>
 
-              <div className="flex items-end gap-[3px]">
-                {[18, 30, 22, 42, 28, 50, 35, 58].map((height, index) => (
-                  <span
-                    key={index}
-                    className={`block w-[3px] rounded-full ${
-                      isCyan ? 'bg-cyan-300/30' : 'bg-rose-300/30'
-                    }`}
-                    style={{
-                      minHeight: '3px',
-                    }}
-                  />
-                ))}
-              </div>
             </div>
           </motion.div>
         </div>

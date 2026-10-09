@@ -176,7 +176,6 @@ a {
   z-index: 1;
   width: min(100% - 48px, 760px);
   text-align: center;
-  animation: opening-content 900ms 150ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .opening-sequence__eyebrow,
@@ -188,6 +187,7 @@ a {
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  animation: opening-content 420ms 620ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .opening-sequence__mark {
@@ -624,11 +624,20 @@ a {
   height: 52px;
   margin: 28px auto 0;
   object-fit: contain;
-  animation: opening-mark 950ms 120ms both cubic-bezier(0.2, 0.75, 0.25, 1);
+  animation: opening-mark 620ms 80ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .opening-sequence__mark {
   margin-top: 12px;
+  animation: opening-content 560ms 340ms both cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.opening-sequence__tagline {
+  animation: opening-content 460ms 760ms both cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.opening-sequence__actions {
+  animation: opening-content 450ms 1120ms both cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .home-hero-title > span {
@@ -885,6 +894,12 @@ a {
   min-height: 460px;
   border-left: 1px solid rgb(255 255 255 / 14%);
   padding-left: clamp(22px, 4vw, 56px);
+}
+
+.service-rail {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .capability-display > .relative.z-10 {
