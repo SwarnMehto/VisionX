@@ -68,7 +68,7 @@ function WhyVisionX() {
       />
 
       <div
-        className="pointer-events-none absolute right-[-100px] top-[20%] h-[350px] w-[350px] rounded-full bg-violet-500/[0.04] blur-[130px]"
+        className="pointer-events-none absolute right-[-100px] top-[20%] h-[350px] w-[350px] rounded-full bg-rose-500/[0.04] blur-[130px]"
         aria-hidden="true"
       />
 
@@ -133,7 +133,7 @@ function WhyVisionX() {
               />
 
               <div
-                className="absolute inset-[65px] rounded-full border border-violet-300/[0.07]"
+                className="absolute inset-[65px] rounded-full border border-rose-300/[0.07]"
                 style={{
                   transform: 'rotateY(63deg) rotateZ(-28deg)',
                 }}
@@ -169,7 +169,7 @@ function WhyVisionX() {
 
               <span className="absolute left-[5%] top-[47%] h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,0.9)]" />
 
-              <span className="absolute right-[9%] top-[18%] h-1.5 w-1.5 rounded-full bg-violet-300 shadow-[0_0_18px_rgba(196,181,253,0.9)]" />
+              <span className="absolute right-[9%] top-[18%] h-1.5 w-1.5 rounded-full bg-rose-300 shadow-[0_0_18px_rgba(251,113,133,0.9)]" />
 
               <span className="absolute bottom-[8%] left-[34%] h-1.5 w-1.5 rounded-full bg-white/70" />
             </div>
@@ -251,7 +251,7 @@ function WhyVisionX() {
 
                   <div className="mt-5 h-px w-full bg-white/[0.05]">
                     <div
-                      className="h-px bg-gradient-to-r from-cyan-300/50 to-violet-300/20"
+                      className="h-px bg-gradient-to-r from-cyan-300/50 to-rose-300/20"
                       style={{
                         width: `${62 + index * 8}%`,
                       }}

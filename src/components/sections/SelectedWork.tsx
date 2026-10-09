@@ -5,43 +5,81 @@ import {
   MoveUpRight,
   Sparkles,
 } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 
 const projects = [
   {
     number: '01',
-    client: 'Krinay Scrubs',
-    category: 'E-commerce / Healthcare',
+    client: 'LIPMT',
+    slug: 'lipmt',
+    logo: '/logos/lipmt.png',
+    category: 'Education',
     description:
-      'A modern medical apparel commerce experience built around product discovery, conversion and a stronger digital brand presence.',
-    tags: ['E-commerce', 'UI / UX', 'Growth'],
-    type: 'commerce',
-    metric: 'DIGITAL COMMERCE',
-    status: 'LIVE SYSTEM',
+      'A responsive digital platform focused on course discovery, admissions, user experience and search visibility for a paramedical education brand.',
+    tags: ['Web Development', 'SEO', 'Performance'],
+    type: 'education',
     size: 'large',
   },
   {
     number: '02',
-    client: 'LIPMT',
-    category: 'Education / Healthcare',
+    client: 'Krinay Scrubs',
+    slug: 'krinay-scrubs',
+    logo: '/logos/krinay.png',
+    category: 'Healthcare / E-commerce',
     description:
-      'A student-focused digital ecosystem designed to improve course discovery, search visibility and admission enquiries.',
-    tags: ['SEO', 'Lead Generation', 'Web'],
-    type: 'education',
-    metric: 'ADMISSIONS',
-    status: 'GROWTH SYSTEM',
+      'A modern e-commerce experience designed around medical apparel, product discovery, conversion and a scalable digital foundation.',
+    tags: ['E-commerce', 'SEO', 'UI/UX'],
+    type: 'commerce',
     size: 'normal',
   },
   {
     number: '03',
     client: 'Sharva Clinic',
-    category: 'Healthcare / Local Growth',
+    slug: 'sharva-clinic',
+    logo: '/logos/sharva.png',
+    category: 'Healthcare',
     description:
-      'A trust-led digital presence focused on local visibility, patient discovery and a stronger healthcare brand experience.',
-    tags: ['Local SEO', 'Brand', 'Web'],
+      'A professional healthcare digital presence focused on clear communication, local discovery and a stronger online brand experience.',
+    tags: ['Web', 'Local SEO', 'Digital Growth'],
     type: 'healthcare',
-    metric: 'LOCAL GROWTH',
-    status: 'DIGITAL PRESENCE',
+    size: 'normal',
+  },
+  {
+    number: '04',
+    client: 'Bluemoon Production',
+    slug: 'bluemoon-production',
+    logo: '/logos/bluemoon.png',
+    category: 'Production / Creative',
+    description:
+      'A creative digital experience supporting the online presence and positioning of a production-focused brand.',
+    tags: ['Digital', 'Creative', 'Web'],
+    type: 'creative',
+    size: 'normal',
+  },
+  {
+    number: '05',
+    client: 'Gem Records',
+    slug: 'gem-records',
+    logo: '/logos/gem-records.png',
+    category: 'Music / Entertainment',
+    description:
+      'A digital experience created around the online presence and creative positioning of a music-focused brand.',
+    tags: ['Digital', 'Creative', 'Web'],
+    type: 'music',
+    size: 'normal',
+  },
+  {
+    number: '06',
+    client: 'Crystal Smart Solution',
+    slug: 'crystal-smart-solution',
+    logo: '/logos/crystal-smart.png',
+    category: 'Business / Technology',
+    description:
+      'A digital experience focused on presenting business solutions clearly and creating a stronger digital foundation.',
+    tags: ['Web', 'Digital', 'Growth'],
+    type: 'technology',
     size: 'normal',
   },
 ]
@@ -49,9 +87,13 @@ const projects = [
 function ProjectVisual({
   type,
   number,
+  logo,
+  client,
 }: {
   type: string
   number: string
+  logo: string
+  client: string
 }) {
   return (
     <div className="absolute inset-0 overflow-hidden">
@@ -68,7 +110,7 @@ function ProjectVisual({
           type === 'commerce'
             ? 'bg-cyan-400/[0.09]'
             : type === 'education'
-              ? 'bg-violet-500/[0.09]'
+              ? 'bg-rose-500/[0.09]'
               : 'bg-blue-400/[0.07]'
         }`}
       />
@@ -98,7 +140,7 @@ function ProjectVisual({
           type === 'commerce'
             ? 'border-cyan-300/15'
             : type === 'education'
-              ? 'border-violet-300/15'
+              ? 'border-rose-300/15'
               : 'border-blue-300/15'
         }`}
       />
@@ -108,7 +150,7 @@ function ProjectVisual({
           type === 'commerce'
             ? 'border-cyan-300/10'
             : type === 'education'
-              ? 'border-violet-300/10'
+              ? 'border-rose-300/10'
               : 'border-white/10'
         }`}
       />
@@ -123,7 +165,7 @@ function ProjectVisual({
             type === 'commerce'
               ? 'border-cyan-300/30 bg-cyan-300/[0.035]'
               : type === 'education'
-                ? 'border-violet-300/30 bg-violet-300/[0.035]'
+                ? 'border-rose-300/30 bg-rose-300/[0.035]'
                 : 'border-blue-300/25 bg-blue-300/[0.035]'
           }`}
         />
@@ -135,10 +177,14 @@ function ProjectVisual({
             type === 'commerce'
               ? 'bg-cyan-300'
               : type === 'education'
-                ? 'bg-violet-300'
+                ? 'bg-rose-300'
                 : 'bg-blue-300'
           }`}
         />
+      </div>
+
+      <div className="absolute left-1/2 top-1/2 z-10 flex h-36 w-52 -translate-x-1/2 -translate-y-1/2 items-center justify-center border border-white/10 bg-black/45 p-5 shadow-2xl backdrop-blur-md transition-transform duration-700 group-hover:scale-105 md:h-44 md:w-64">
+        <img src={logo} width="256" height="176" alt={`${client} logo`} loading="lazy" className="max-h-full max-w-full object-contain transition-transform duration-700 group-hover:scale-110" />
       </div>
 
       {/* =========================================================
@@ -150,7 +196,7 @@ function ProjectVisual({
           type === 'commerce'
             ? 'bg-cyan-300'
             : type === 'education'
-              ? 'bg-violet-300'
+              ? 'bg-rose-300'
               : 'bg-blue-300'
         }`}
       />
@@ -175,7 +221,7 @@ function ProjectVisual({
         </p>
 
         <p className="mt-1 text-[8px] uppercase tracking-[0.28em] text-white/10">
-          2050 / SYSTEM
+          CASE STUDY / VX
         </p>
       </div>
 
@@ -195,8 +241,14 @@ function ProjectVisual({
 }
 
 function SelectedWork() {
+  const progressRef = useRef<HTMLSpanElement>(null)
+
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.06 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       id="work"
       className="relative overflow-hidden border-t border-white/10 bg-[#050505] px-6 py-24 md:px-8 md:py-32"
     >
@@ -210,7 +262,7 @@ function SelectedWork() {
       >
         <div className="absolute left-[-220px] top-[30%] h-[500px] w-[500px] rounded-full bg-cyan-400/[0.025] blur-[150px]" />
 
-        <div className="absolute right-[-220px] bottom-[10%] h-[550px] w-[550px] rounded-full bg-violet-500/[0.025] blur-[170px]" />
+        <div className="absolute right-[-220px] bottom-[10%] h-[550px] w-[550px] rounded-full bg-rose-500/[0.025] blur-[170px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl">
@@ -224,7 +276,7 @@ function SelectedWork() {
               <span className="h-px w-10 bg-white/30" />
 
               <p className="text-[10px] uppercase tracking-[0.32em] text-white/35">
-                Selected Work
+                03 / Originals
               </p>
             </div>
 
@@ -261,60 +313,27 @@ function SelectedWork() {
         </div>
 
         {/* =========================================================
-            SYSTEM LINE
-        ========================================================= */}
-
-        <div className="mt-16 flex flex-wrap items-center gap-4 border-y border-white/10 py-5">
-          <div className="flex items-center gap-2">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-40" />
-
-              <span className="relative h-2 w-2 rounded-full bg-cyan-400" />
-            </span>
-
-            <span className="text-[9px] uppercase tracking-[0.28em] text-white/40">
-              Selected systems / online
-            </span>
-          </div>
-
-          <span className="hidden h-3 w-px bg-white/10 md:block" />
-
-          <span className="text-[9px] uppercase tracking-[0.28em] text-white/20">
-            Strategy
-          </span>
-
-          <span className="text-white/10">×</span>
-
-          <span className="text-[9px] uppercase tracking-[0.28em] text-white/20">
-            Experience
-          </span>
-
-          <span className="text-white/10">×</span>
-
-          <span className="text-[9px] uppercase tracking-[0.28em] text-white/20">
-            Technology
-          </span>
-
-          <span className="text-white/10">×</span>
-
-          <span className="text-[9px] uppercase tracking-[0.28em] text-white/20">
-            Growth
-          </span>
-        </div>
-
-        {/* =========================================================
             PROJECTS
         ========================================================= */}
 
-        <div className="mt-10 space-y-5">
+        <div
+          role="region"
+          aria-label="Selected project rail"
+          tabIndex={0}
+          data-cursor="DRAG"
+          onScroll={(event) => {
+            const rail = event.currentTarget
+            const maximum = rail.scrollWidth - rail.clientWidth
+            const progress = maximum > 0 ? rail.scrollLeft / maximum : 1
+            progressRef.current?.style.setProperty('transform', `scaleX(${progress})`)
+          }}
+          className="project-rail mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto overscroll-x-contain pb-5"
+        >
           {projects.map((project) => (
             <article
               key={project.number}
-              className={`group relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.02] transition-all duration-700 hover:border-white/20 hover:bg-white/[0.035] ${
-                project.size === 'large'
-                  ? 'min-h-[570px]'
-                  : 'min-h-[500px]'
-              }`}
+              data-cursor="VIEW PROJECT"
+              className="project-poster group relative min-h-[490px] min-w-[min(88vw,760px)] snap-start overflow-hidden border border-white/10 bg-white/[0.02] transition-colors duration-500 hover:border-white/20 hover:bg-white/[0.035] md:min-h-[520px]"
             >
               {/* =====================================================
                   VISUAL
@@ -323,13 +342,15 @@ function SelectedWork() {
               <ProjectVisual
                 type={project.type}
                 number={project.number}
+                logo={project.logo}
+                client={project.client}
               />
 
               {/* =====================================================
                   DARK READABILITY
               ===================================================== */}
 
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#050505]/95 via-[#050505]/65 to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#050505]/90 via-[#050505]/50 to-transparent" />
 
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050505]/90 via-transparent to-transparent" />
 
@@ -337,7 +358,7 @@ function SelectedWork() {
                   CONTENT
               ===================================================== */}
 
-              <div className="relative flex min-h-[500px] flex-col justify-between p-6 md:p-10">
+              <div className="relative flex min-h-[490px] flex-col justify-between p-6 md:min-h-[520px] md:p-10">
                 {/* TOP */}
 
                 <div className="flex items-start justify-between">
@@ -351,31 +372,12 @@ function SelectedWork() {
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 rounded-full border border-white/10 bg-black/25 px-3 py-2 backdrop-blur-xl">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-40" />
-
-                      <span className="relative h-1.5 w-1.5 rounded-full bg-cyan-400" />
-                    </span>
-
-                    <span className="text-[8px] uppercase tracking-[0.2em] text-white/35">
-                      {project.status}
-                    </span>
-                  </div>
                 </div>
 
                 {/* MIDDLE */}
 
                 <div className="max-w-2xl">
-                  <div className="mb-5 flex items-center gap-3">
-                    <span className="h-px w-8 bg-white/25" />
-
-                    <span className="text-[9px] uppercase tracking-[0.3em] text-white/25">
-                      {project.metric}
-                    </span>
-                  </div>
-
-                  <h3 className="text-5xl font-medium leading-[0.9] tracking-[-0.065em] text-white md:text-7xl">
+                  <h3 className="project-poster__title text-5xl font-medium leading-[0.9] tracking-[-0.065em] text-white md:text-7xl">
                     {project.client}
                   </h3>
 
@@ -410,7 +412,7 @@ function SelectedWork() {
                   </div>
 
                   <Link
-                    to="/work"
+                    to={`/work/${project.slug}`}
                     className="group/link inline-flex items-center gap-2 self-start rounded-full border border-white/15 bg-black/20 px-5 py-3 text-[9px] font-medium uppercase tracking-[0.2em] text-white/65 backdrop-blur-xl transition-all duration-300 hover:border-white/30 hover:bg-white/[0.06] hover:text-white"
                   >
                     Explore Project
@@ -443,6 +445,10 @@ function SelectedWork() {
           ))}
         </div>
 
+        <div className="project-progress" aria-hidden="true">
+          <span ref={progressRef} style={{ transform: 'scaleX(0.167)' }} />
+        </div>
+
         {/* =========================================================
             VIEW ALL WORK
         ========================================================= */}
@@ -471,7 +477,7 @@ function SelectedWork() {
           </Link>
         </div>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

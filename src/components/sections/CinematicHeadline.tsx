@@ -67,7 +67,7 @@ function CinematicHeadline() {
       ===================================================== */}
 
       <div
-        className="pointer-events-none absolute left-[8%] top-[20%] h-72 w-72 rounded-full bg-violet-500/[0.06] blur-[120px]"
+        className="pointer-events-none absolute left-[8%] top-[20%] h-72 w-72 rounded-full bg-rose-500/[0.06] blur-[120px]"
         aria-hidden="true"
       />
 
@@ -89,7 +89,7 @@ function CinematicHeadline() {
 
         <div className="absolute inset-[45px] rounded-full border border-cyan-300/[0.08]" />
 
-        <div className="absolute inset-[90px] rounded-full border border-violet-400/[0.08]" />
+        <div className="absolute inset-[90px] rounded-full border border-rose-400/[0.08]" />
 
         <div
           className="absolute inset-[35px] rounded-full border border-white/[0.04]"
@@ -117,7 +117,7 @@ function CinematicHeadline() {
 
         <span className="absolute left-[8%] top-1/2 h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_15px_rgba(103,232,249,0.8)]" />
 
-        <span className="absolute right-[12%] top-[20%] h-1.5 w-1.5 rounded-full bg-violet-300 shadow-[0_0_15px_rgba(196,181,253,0.8)]" />
+        <span className="absolute right-[12%] top-[20%] h-1.5 w-1.5 rounded-full bg-rose-300 shadow-[0_0_15px_rgba(251,113,133,0.8)]" />
 
         <span className="absolute bottom-[15%] left-[28%] h-1 w-1 rounded-full bg-white/60" />
       </div>
@@ -170,7 +170,7 @@ function CinematicHeadline() {
             </div>
 
             <div className="flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.02] px-4 py-2.5 backdrop-blur-md">
-              <span className="h-1.5 w-1.5 rounded-full bg-violet-300 shadow-[0_0_10px_rgba(196,181,253,0.7)]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-rose-300 shadow-[0_0_10px_rgba(251,113,133,0.7)]" />
 
               <span className="text-[9px] uppercase tracking-[0.2em] text-white/40">
                 Technology

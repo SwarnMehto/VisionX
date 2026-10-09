@@ -119,7 +119,7 @@ function HeroHUD() {
 
             <div className="rounded-lg border border-white/5 bg-white/[0.03] p-2">
 
-              <div className="h-1.5 w-1.5 rounded-full bg-violet-300" />
+              <div className="h-1.5 w-1.5 rounded-full bg-rose-300" />
 
               <p className="mt-2 text-[8px] uppercase tracking-wider text-white/35">
                 Ads

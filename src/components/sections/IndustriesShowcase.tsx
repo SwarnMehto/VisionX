@@ -31,7 +31,7 @@ const industries = [
       'High-converting digital platforms and student acquisition systems built for institutes, colleges and education brands.',
     icon: GraduationCap,
     tags: ['Admissions', 'Ads', 'SEO'],
-    accent: 'violet',
+    accent: 'rose',
     size: 'normal',
   },
   {
@@ -53,7 +53,7 @@ const industries = [
       'Digital systems that help property brands generate visibility, qualified leads and stronger customer journeys.',
     icon: Building2,
     tags: ['Leads', 'Web', 'Performance'],
-    accent: 'violet',
+    accent: 'rose',
     size: 'normal',
   },
   {
@@ -75,7 +75,7 @@ const industries = [
       'Authority-driven digital ecosystems for businesses competing on trust, expertise and long-term relationships.',
     icon: BriefcaseBusiness,
     tags: ['Brand', 'Authority', 'Growth'],
-    accent: 'violet',
+    accent: 'rose',
     size: 'normal',
   },
 ]
@@ -96,7 +96,7 @@ function IndustriesShowcase() {
       >
         <div className="absolute left-[-180px] top-[20%] h-[420px] w-[420px] rounded-full bg-cyan-400/[0.035] blur-[140px]" />
 
-        <div className="absolute right-[-180px] top-[45%] h-[500px] w-[500px] rounded-full bg-violet-500/[0.035] blur-[160px]" />
+        <div className="absolute right-[-180px] top-[45%] h-[500px] w-[500px] rounded-full bg-rose-500/[0.035] blur-[160px]" />
 
         <div
           className="absolute inset-0 opacity-[0.035]"
@@ -119,7 +119,7 @@ function IndustriesShowcase() {
               <span className="h-px w-10 bg-white/30" />
 
               <p className="text-[10px] font-medium uppercase tracking-[0.32em] text-white/35">
-                Industries
+                04 / Worlds
               </p>
             </div>
 
@@ -139,12 +139,9 @@ function IndustriesShowcase() {
 
           <div>
             <h2 className="max-w-5xl text-4xl font-medium leading-[0.95] tracking-[-0.055em] text-white md:text-6xl lg:text-7xl">
-              Built for different
+              WHERE WE
               <br />
-
-              <span className="text-white/25">
-                worlds. Designed to scale.
-              </span>
+              <span className="text-white/30">BUILD.</span>
             </h2>
 
             <p className="mt-7 max-w-2xl text-base leading-7 text-white/45 md:text-lg">
@@ -194,17 +191,18 @@ function IndustriesShowcase() {
             INDUSTRY GRID
         ========================================================= */}
 
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div role="region" aria-label="Vision X industries" tabIndex={0} data-cursor="DRAG" className="industry-rail mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain pb-5">
           {industries.map((industry) => {
             const Icon = industry.icon
 
             const isLarge = industry.size === 'large'
 
             return (
-              <div
+              <article
                 key={industry.title}
-                className={`group relative overflow-hidden rounded-[24px] border border-white/10 bg-white/[0.025] transition-all duration-500 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.045] ${
-                  isLarge ? 'md:col-span-2 lg:col-span-2' : ''
+                data-cursor="EXPLORE"
+                className={`industry-poster group relative min-w-[min(82vw,420px)] snap-start overflow-hidden border-b border-white/15 bg-white/[0.018] transition-all duration-500 hover:border-white/30 ${
+                  isLarge ? 'md:min-w-[min(52vw,620px)]' : ''
                 }`}
               >
                 {/* Card atmosphere */}
@@ -213,7 +211,7 @@ function IndustriesShowcase() {
                   className={`pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full blur-[90px] transition-opacity duration-500 group-hover:opacity-100 ${
                     industry.accent === 'cyan'
                       ? 'bg-cyan-400/[0.07]'
-                      : 'bg-violet-500/[0.07]'
+                      : 'bg-rose-500/[0.07]'
                   }`}
                 />
 
@@ -248,7 +246,7 @@ function IndustriesShowcase() {
                         className={`flex h-11 w-11 items-center justify-center rounded-xl border ${
                           industry.accent === 'cyan'
                             ? 'border-cyan-300/10 bg-cyan-300/[0.05]'
-                            : 'border-violet-300/10 bg-violet-300/[0.05]'
+                            : 'border-rose-300/10 bg-rose-300/[0.05]'
                         }`}
                       >
                         <Icon
@@ -256,7 +254,7 @@ function IndustriesShowcase() {
                           className={
                             industry.accent === 'cyan'
                               ? 'text-cyan-300'
-                              : 'text-violet-300'
+                              : 'text-rose-300'
                           }
                         />
                       </div>
@@ -313,7 +311,7 @@ function IndustriesShowcase() {
                     {industry.number}
                   </span>
                 </div>
-              </div>
+              </article>
             )
           })}
         </div>

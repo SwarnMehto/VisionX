@@ -11,6 +11,7 @@ import {
 } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const services = [
   {
@@ -21,6 +22,7 @@ const services = [
       'High-performance websites and digital experiences engineered to make brands impossible to ignore.',
     icon: Globe2,
     tags: ['Web Design', 'Development', '3D Experiences'],
+    href: '/services/website-development',
     accent: 'cyan',
   },
   {
@@ -31,7 +33,8 @@ const services = [
       'Search visibility built for traditional search engines, AI answers and the next generation of discovery.',
     icon: Search,
     tags: ['SEO', 'AEO', 'GEO'],
-    accent: 'violet',
+    href: '/services/seo',
+    accent: 'rose',
   },
   {
     id: '03',
@@ -41,6 +44,7 @@ const services = [
       'Data-driven campaigns designed to turn attention into qualified traffic, leads and revenue.',
     icon: BarChart3,
     tags: ['Google Ads', 'Meta Ads', 'Analytics'],
+    href: '/services/google-ads',
     accent: 'cyan',
   },
   {
@@ -51,7 +55,8 @@ const services = [
       'Visual systems, campaigns and creative assets that give ambitious brands a distinct digital identity.',
     icon: Sparkles,
     tags: ['Branding', 'Creative', 'Social'],
-    accent: 'violet',
+    href: '/services/branding',
+    accent: 'rose',
   },
   {
     id: '05',
@@ -61,6 +66,7 @@ const services = [
       'Connected digital tools, automation and intelligent workflows that make businesses operate smarter.',
     icon: Code2,
     tags: ['Automation', 'CRM', 'Integrations'],
+    href: '/services/digital-growth-systems',
     accent: 'cyan',
   },
   {
@@ -71,7 +77,8 @@ const services = [
       'From first launch to continuous optimisation, we build systems that are ready to evolve with your business.',
     icon: Megaphone,
     tags: ['Launch', 'Testing', 'Optimisation'],
-    accent: 'violet',
+    href: '/services/lead-generation',
+    accent: 'rose',
   },
 ]
 
@@ -112,17 +119,7 @@ function ServicesShowcase() {
           BACKGROUND HORIZONTAL LIGHT
       ========================================================= */}
 
-      <motion.div
-        className="pointer-events-none absolute left-[-20%] top-[30%] h-px w-[140%] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent"
-        animate={{
-          x: ['-8%', '8%', '-8%'],
-        }}
-        transition={{
-          duration: 14,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
+      <div className="pointer-events-none absolute left-[-20%] top-[30%] h-px w-[140%] bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
       {/* =========================================================
           AMBIENT GLOW
@@ -133,22 +130,13 @@ function ServicesShowcase() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         className={`pointer-events-none absolute right-[-10%] top-[15%] h-[500px] w-[500px] rounded-full blur-[150px] ${
-          isCyan ? 'bg-cyan-400/[0.055]' : 'bg-violet-500/[0.055]'
+          isCyan ? 'bg-cyan-400/[0.055]' : 'bg-rose-500/[0.055]'
         }`}
       />
 
-      <motion.div
-        animate={{
-          scale: [1, 1.08, 1],
-          opacity: [0.35, 0.55, 0.35],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
+      <div
         className={`pointer-events-none absolute left-[20%] top-[55%] h-[300px] w-[300px] rounded-full blur-[130px] ${
-          isCyan ? 'bg-cyan-400/[0.025]' : 'bg-violet-500/[0.025]'
+          isCyan ? 'bg-cyan-400/[0.025]' : 'bg-rose-500/[0.025]'
         }`}
       />
 
@@ -172,7 +160,7 @@ function ServicesShowcase() {
               <span className="h-px w-10 bg-white/25" />
 
               <span className="text-[10px] uppercase tracking-[0.3em] text-white/30">
-                Capabilities / 003
+                02 / Capabilities
               </span>
             </div>
 
@@ -181,13 +169,13 @@ function ServicesShowcase() {
                 <span className="relative flex h-2 w-2">
                   <span
                     className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-30 ${
-                      isCyan ? 'bg-cyan-300' : 'bg-violet-300'
+                      isCyan ? 'bg-cyan-300' : 'bg-rose-300'
                     }`}
                   />
 
                   <span
                     className={`relative h-2 w-2 rounded-full ${
-                      isCyan ? 'bg-cyan-300' : 'bg-violet-300'
+                      isCyan ? 'bg-cyan-300' : 'bg-rose-300'
                     }`}
                   />
                 </span>
@@ -244,7 +232,7 @@ function ServicesShowcase() {
                 </span>
               </div>
 
-              <div className="space-y-1">
+              <div className="service-rail flex snap-x snap-mandatory gap-2 overflow-x-auto pb-3 lg:flex-col lg:overflow-visible">
                 {services.map((service, index) => {
                   const Icon = service.icon
                   const isActive = index === active
@@ -253,6 +241,8 @@ function ServicesShowcase() {
                     <motion.button
                       key={service.id}
                       type="button"
+                      aria-pressed={isActive}
+                      aria-label={`${service.id}: ${service.title}`}
                       onClick={() => setActive(index)}
                       whileHover={{
                         x: 5,
@@ -260,7 +250,7 @@ function ServicesShowcase() {
                       whileTap={{
                         scale: 0.985,
                       }}
-                      className={`group relative flex w-full items-center gap-4 overflow-hidden rounded-xl border px-4 py-4 text-left transition-all duration-500 ${
+                      className={`group relative flex min-w-[min(78vw,310px)] snap-start items-center gap-4 overflow-hidden rounded-xl border px-4 py-4 text-left transition-all duration-500 lg:min-w-0 ${
                         isActive
                           ? 'border-white/[0.14] bg-white/[0.045]'
                           : 'border-transparent hover:border-white/[0.07] hover:bg-white/[0.02]'
@@ -273,7 +263,7 @@ function ServicesShowcase() {
                           isActive
                             ? isCyan
                               ? 'bg-cyan-300 shadow-[0_0_12px_rgba(103,232,249,0.8)]'
-                              : 'bg-violet-300 shadow-[0_0_12px_rgba(196,181,253,0.8)]'
+                              : 'bg-rose-300 shadow-[0_0_12px_rgba(251,113,133,0.8)]'
                             : 'bg-transparent'
                         }`}
                       />
@@ -282,31 +272,17 @@ function ServicesShowcase() {
                         {service.id}
                       </span>
 
-                      <motion.div
-                        animate={
-                          isActive
-                            ? {
-                                rotate: [0, 5, -5, 0],
-                              }
-                            : {
-                                rotate: 0,
-                              }
-                        }
-                        transition={{
-                          duration: 2.5,
-                          repeat: isActive ? Infinity : 0,
-                          ease: 'easeInOut',
-                        }}
+                      <div
                         className={`flex h-9 w-9 items-center justify-center rounded-lg border transition-all duration-500 ${
                           isActive
                             ? service.accent === 'cyan'
                               ? 'border-cyan-300/20 bg-cyan-300/[0.08] text-cyan-200'
-                              : 'border-violet-300/20 bg-violet-300/[0.08] text-violet-200'
+                              : 'border-rose-300/20 bg-rose-300/[0.08] text-rose-200'
                             : 'border-white/[0.07] bg-white/[0.02] text-white/25'
                         }`}
                       >
                         <Icon size={16} />
-                      </motion.div>
+                      </div>
 
                       <span
                         className={`text-sm transition-colors duration-300 ${
@@ -359,12 +335,12 @@ function ServicesShowcase() {
               duration: 0.7,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="relative min-h-[520px] overflow-hidden rounded-3xl border border-white/[0.08] bg-white/[0.018]"
+            className="capability-display relative min-h-[520px] overflow-hidden"
           >
             {/* Scan lines */}
 
             <div
-              className="pointer-events-none absolute inset-0 opacity-[0.15]"
+              className="capability-scanlines pointer-events-none absolute inset-0 opacity-[0.15]"
               style={{
                 backgroundImage:
                   'linear-gradient(transparent 50%, rgba(255,255,255,0.025) 50%)',
@@ -375,7 +351,7 @@ function ServicesShowcase() {
             {/* Fine grid */}
 
             <div
-              className="pointer-events-none absolute inset-0 opacity-[0.08]"
+              className="capability-grid pointer-events-none absolute inset-0 opacity-[0.08]"
               style={{
                 backgroundImage: `
                   linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
@@ -393,16 +369,8 @@ function ServicesShowcase() {
                 ORBITAL SYSTEM
             ===================================================== */}
 
-            <motion.div
-              animate={{
-                rotate: 360,
-              }}
-              transition={{
-                duration: 28,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-              className="pointer-events-none absolute right-[-90px] top-1/2 h-[430px] w-[430px] -translate-y-1/2"
+            <div
+              className="capability-orbit pointer-events-none absolute right-[-90px] top-1/2 h-[430px] w-[430px] -translate-y-1/2"
             >
               <div className="absolute inset-0 rounded-full border border-white/[0.06]" />
 
@@ -414,7 +382,7 @@ function ServicesShowcase() {
               />
 
               <div
-                className="absolute inset-[85px] rounded-full border border-violet-300/[0.07]"
+                className="absolute inset-[85px] rounded-full border border-rose-300/[0.07]"
                 style={{
                   transform: 'rotateY(60deg) rotateZ(-20deg)',
                 }}
@@ -424,45 +392,29 @@ function ServicesShowcase() {
 
               <span className="absolute left-[10%] top-1/2 h-1.5 w-1.5 rounded-full bg-cyan-300/70 shadow-[0_0_15px_rgba(103,232,249,0.8)]" />
 
-              <span className="absolute right-[16%] top-[18%] h-1 w-1 rounded-full bg-violet-300/70 shadow-[0_0_15px_rgba(196,181,253,0.8)]" />
+              <span className="absolute right-[16%] top-[18%] h-1 w-1 rounded-full bg-rose-300/70 shadow-[0_0_15px_rgba(251,113,133,0.8)]" />
 
               <span className="absolute bottom-[15%] right-[35%] h-1.5 w-1.5 rounded-full bg-white/50" />
-            </motion.div>
+            </div>
 
             {/* Counter orbit */}
 
-            <motion.div
-              animate={{
-                rotate: -360,
-              }}
-              transition={{
-                duration: 38,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-              className="pointer-events-none absolute right-[-90px] top-1/2 h-[430px] w-[430px] -translate-y-1/2"
+            <div
+              className="capability-orbit pointer-events-none absolute right-[-90px] top-1/2 h-[430px] w-[430px] -translate-y-1/2"
             >
               <div className="absolute inset-[70px] rounded-full border border-white/[0.035]" />
-            </motion.div>
+            </div>
 
             {/* Core */}
 
-            <motion.div
-              animate={{
-                scale: [1, 1.04, 1],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              className="pointer-events-none absolute right-[calc(215px-48px)] top-1/2 z-[1] hidden h-24 w-24 -translate-y-1/2 rounded-full border border-white/[0.08] bg-black/40 shadow-[0_0_100px_rgba(34,211,238,0.06)] backdrop-blur-xl sm:block"
+            <div
+              className="capability-core pointer-events-none absolute right-[calc(215px-48px)] top-1/2 z-[1] hidden h-24 w-24 -translate-y-1/2 rounded-full border border-white/[0.08] bg-black/40 shadow-[0_0_100px_rgba(34,211,238,0.06)] backdrop-blur-xl sm:block"
             >
               <div
                 className={`absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full ${
                   isCyan
                     ? 'bg-cyan-300 shadow-[0_0_25px_rgba(103,232,249,0.9)]'
-                    : 'bg-violet-300 shadow-[0_0_25px_rgba(196,181,253,0.9)]'
+                    : 'bg-rose-300 shadow-[0_0_25px_rgba(251,113,133,0.9)]'
                 }`}
               />
 
@@ -470,10 +422,10 @@ function ServicesShowcase() {
                 className={`absolute left-1/2 top-1/2 h-10 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full border ${
                   isCyan
                     ? 'border-cyan-300/[0.08]'
-                    : 'border-violet-300/[0.08]'
+                    : 'border-rose-300/[0.08]'
                 }`}
               />
-            </motion.div>
+            </div>
 
             {/* =====================================================
                 CONTENT
@@ -505,7 +457,7 @@ function ServicesShowcase() {
                   className={`flex h-10 w-10 items-center justify-center rounded-full border ${
                     isCyan
                       ? 'border-cyan-300/20 bg-cyan-300/[0.06] text-cyan-200'
-                      : 'border-violet-300/20 bg-violet-300/[0.06] text-violet-200'
+                      : 'border-rose-300/20 bg-rose-300/[0.06] text-rose-200'
                   }`}
                 >
                   <CurrentIcon size={18} />
@@ -536,19 +488,11 @@ function ServicesShowcase() {
                   className="max-w-xl"
                 >
                   <div className="mb-5 flex items-center gap-3">
-                    <motion.span
-                      animate={{
-                        opacity: [0.45, 1, 0.45],
-                      }}
-                      transition={{
-                        duration: 1.8,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      }}
+                    <span
                       className={`h-1.5 w-1.5 rounded-full ${
                         isCyan
                           ? 'bg-cyan-300 shadow-[0_0_12px_rgba(103,232,249,0.8)]'
-                          : 'bg-violet-300 shadow-[0_0_12px_rgba(196,181,253,0.8)]'
+                          : 'bg-rose-300 shadow-[0_0_12px_rgba(251,113,133,0.8)]'
                       }`}
                     />
 
@@ -561,7 +505,7 @@ function ServicesShowcase() {
                     </span>
                   </div>
 
-                  <h3 className="max-w-2xl text-4xl font-medium tracking-[-0.05em] text-white md:text-6xl">
+                  <h3 className="max-w-2xl font-display text-5xl font-medium leading-[0.94] tracking-normal text-white md:text-8xl">
                     {current.title}
                   </h3>
 
@@ -590,12 +534,17 @@ function ServicesShowcase() {
                       </motion.span>
                     ))}
                   </div>
+
+                  <Link to={current.href} className="vx-magnetic mt-8 inline-flex min-h-12 items-center gap-3 border border-white/20 px-5 text-sm text-white/85 transition-colors hover:border-cyan-100/45 hover:text-white">
+                    Explore {current.title}
+                    <ArrowUpRight size={16} aria-hidden="true" />
+                  </Link>
                 </motion.div>
               </AnimatePresence>
 
               {/* Bottom system */}
 
-              <div className="mt-12 flex items-center justify-between border-t border-white/[0.07] pt-5">
+              <div className="capability-live-status mt-12 flex items-center justify-between border-t border-white/[0.07] pt-5">
                 <div className="flex items-center gap-2">
                   <Zap size={12} className="text-white/25" />
 
@@ -620,25 +569,17 @@ function ServicesShowcase() {
                 SIDE DECORATION
             ===================================================== */}
 
-            <div className="pointer-events-none absolute bottom-8 right-8 hidden flex-col items-end gap-2 md:flex">
+            <div className="capability-side-decoration pointer-events-none absolute bottom-8 right-8 hidden flex-col items-end gap-2 md:flex">
               <span className="text-[8px] uppercase tracking-[0.25em] text-white/10">
                 CORE
               </span>
 
               <div className="flex items-end gap-[3px]">
                 {[18, 30, 22, 42, 28, 50, 35, 58].map((height, index) => (
-                  <motion.span
+                  <span
                     key={index}
-                    animate={{
-                      height: [`${height}%`, `${Math.min(height + 18, 90)}%`, `${height}%`],
-                    }}
-                    transition={{
-                      duration: 1.8 + index * 0.08,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
                     className={`block w-[3px] rounded-full ${
-                      isCyan ? 'bg-cyan-300/30' : 'bg-violet-300/30'
+                      isCyan ? 'bg-cyan-300/30' : 'bg-rose-300/30'
                     }`}
                     style={{
                       minHeight: '3px',
@@ -681,7 +622,7 @@ function ServicesShowcase() {
                 className={`h-1.5 w-1.5 rounded-full ${
                   isCyan
                     ? 'bg-cyan-300 shadow-[0_0_10px_rgba(103,232,249,0.6)]'
-                    : 'bg-violet-300 shadow-[0_0_10px_rgba(196,181,253,0.6)]'
+                    : 'bg-rose-300 shadow-[0_0_10px_rgba(251,113,133,0.6)]'
                 }`}
               />
 

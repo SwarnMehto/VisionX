@@ -9,50 +9,46 @@ import {
   Phone,
 } from 'lucide-react'
 import SEO from '../components/seo/SEO'
-
-const WHATSAPP_NUMBER = '918700116436'
-const DISPLAY_PHONE = '+91 87001 16436'
-const EMAIL = 'swarnkumarmehto@gmail.com'
+import { DISPLAY_PHONE, PUBLIC_EMAIL, WHATSAPP_URL } from '../data/contact'
 
 function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     const form = event.currentTarget
     const formData = new FormData(form)
+    const payload = Object.fromEntries(formData.entries())
 
-    const name = String(formData.get('name') || '')
-    const email = String(formData.get('email') || '')
-    const phone = String(formData.get('phone') || '')
-    const company = String(formData.get('company') || '')
-    const service = String(formData.get('service') || '')
-    const message = String(formData.get('message') || '')
+    setIsSubmitting(true)
+    setSubmitError('')
 
-    const whatsappMessage = `
-Hello Vision X,
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      const result = await response.json().catch(() => null)
 
-I would like to discuss a project.
+      if (!response.ok) {
+        throw new Error(result?.message || 'Unable to send your enquiry. Please try again.')
+      }
 
-Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Company: ${company || 'Not provided'}
-Service: ${service}
-
-Message:
-${message}
-    `.trim()
-
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-      whatsappMessage,
-    )}`
-
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
-
-    setSubmitted(true)
-    form.reset()
+      setSubmitted(true)
+      form.reset()
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : 'Something went wrong. Please try again.',
+      )
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -141,7 +137,7 @@ ${message}
               {/* EMAIL */}
 
               <a
-                href={`mailto:${EMAIL}`}
+                href={`mailto:${PUBLIC_EMAIL}`}
                 className="group block rounded-[28px] border border-white/10 bg-white/[0.025] p-6 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04]"
               >
 
@@ -159,7 +155,7 @@ ${message}
                       </p>
 
                       <p className="mt-1 text-sm text-white/75">
-                        {EMAIL}
+                        {PUBLIC_EMAIL}
                       </p>
                     </div>
 
@@ -177,7 +173,7 @@ ${message}
               {/* WHATSAPP */}
 
               <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}`}
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group block rounded-[28px] border border-white/10 bg-white/[0.025] p-6 transition-all duration-300 hover:border-white/20 hover:bg-white/[0.04]"
@@ -291,7 +287,7 @@ ${message}
               </div>
 
               {submitted && (
-                <div className="mb-7 flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                <div role="status" className="mb-7 flex items-start gap-3 rounded-2xl border border-emerald-300/20 bg-emerald-300/[0.06] p-4">
 
                   <CheckCircle2
                     size={19}
@@ -300,16 +296,21 @@ ${message}
 
                   <div>
                     <p className="text-sm font-medium">
-                      Enquiry prepared successfully.
+                      Enquiry sent successfully.
                     </p>
 
                     <p className="mt-1 text-xs leading-5 text-white/45">
-                      WhatsApp has been opened with your enquiry details.
-                      You can send the message there to complete the enquiry.
+                      Thanks for reaching out. The Vision X team will be in touch.
                     </p>
                   </div>
 
                 </div>
+              )}
+
+              {submitError && (
+                <p role="alert" className="mb-7 rounded-2xl border border-red-300/20 bg-red-300/[0.06] p-4 text-sm text-red-100/90">
+                  {submitError}
+                </p>
               )}
 
               <form
@@ -517,11 +518,12 @@ ${message}
 
                 <button
                   type="submit"
-                  className="group flex w-full items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-semibold !text-black transition-all duration-300 hover:scale-[1.01] hover:bg-white/90"
+                  disabled={isSubmitting}
+                  className="group flex w-full items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-semibold !text-black transition-all duration-300 hover:scale-[1.01] hover:bg-white/90 disabled:cursor-wait disabled:opacity-60"
                 >
 
                   <span className="!text-black">
-                    Send Enquiry on WhatsApp
+                    {isSubmitting ? 'Sending Enquiry…' : 'Send Project Enquiry'}
                   </span>
 
                   <ArrowUpRight
@@ -531,9 +533,8 @@ ${message}
 
                 </button>
 
-                <p className="text-center text-xs leading-5 text-white/25">
-                  Your enquiry will open in WhatsApp with the details you
-                  entered, ready to send to Vision X.
+                <p className="text-center text-xs leading-5 text-white/35">
+                  Your details are sent securely to the Vision X team. Prefer WhatsApp? Use the contact link above.
                 </p>
 
               </form>

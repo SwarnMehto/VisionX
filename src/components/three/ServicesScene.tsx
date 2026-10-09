@@ -131,7 +131,7 @@ function ServicesScene() {
           position: [0, 0, 9],
           fov: 42,
         }}
-        dpr={[1, 1.5]}
+        dpr={[1, 1.25]}
         gl={{
           antialias: true,
           alpha: true,

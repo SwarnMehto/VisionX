@@ -1,8 +1,11 @@
 import { ArrowDown, ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import ServicesScene from '../components/three/ServicesScene'
+import { lazy, Suspense } from 'react'
+import ViewportGate from '../components/three/ViewportGate'
 import SEO from '../components/seo/SEO'
 import { serviceCategories } from '../data/services'
+
+const ServicesScene = lazy(() => import('../components/three/ServicesScene'))
 
 function Services() {
   return (
@@ -22,12 +25,11 @@ function Services() {
         <section className="relative min-h-[85svh] overflow-hidden px-6 pb-20 pt-36 md:px-8 md:pt-44">
 
           {/* 3D Background */}
-          <div
-            className="pointer-events-none absolute inset-0"
-            aria-hidden="true"
-          >
-            <ServicesScene />
-          </div>
+          <ViewportGate className="pointer-events-none absolute inset-0">
+            <Suspense fallback={null}>
+              <ServicesScene />
+            </Suspense>
+          </ViewportGate>
 
           {/* Gradient overlays */}
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_38%,rgba(255,255,255,0.09),transparent_30%)]" />
@@ -43,7 +45,7 @@ function Services() {
                 <span className="h-px w-10 bg-white/35" />
 
                 <p className="text-xs font-medium uppercase tracking-[0.35em] text-white/40">
-                  Vision X Services
+                  02 / Capabilities
                 </p>
               </div>
 

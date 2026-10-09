@@ -1,17 +1,34 @@
-import { ArrowDown, ArrowUpRight, Sparkles } from 'lucide-react'
+import { lazy, Suspense, useState } from 'react'
+import { ArrowDown, ArrowUpRight, Mail, MessageCircle, Play } from 'lucide-react'
+import { motion, MotionConfig } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 import SEO from '../components/seo/SEO'
-import HeroScene from '../components/three/HeroScene'
 import SelectedWork from '../components/sections/SelectedWork'
 import ServicesShowcase from '../components/sections/ServicesShowcase'
-import WhyVisionX from '../components/sections/WhyVisionX'
-import HeroHUD from '../components/sections/HeroHUD'
 import IndustriesShowcase from '../components/sections/IndustriesShowcase'
+import CinematicOpening from '../components/sections/CinematicOpening'
+import VisitorJourney from '../components/sections/VisitorJourney'
+import ViewportGate from '../components/three/ViewportGate'
+import FeaturedCapabilities from '../components/sections/FeaturedCapabilities'
+import HomeInsights from '../components/sections/HomeInsights'
+import { PUBLIC_EMAIL, WHATSAPP_URL } from '../data/contact'
+
+const HeroScene = lazy(() => import('../components/three/HeroScene'))
+const ExperienceIntro = lazy(() => import('../components/sections/ExperienceIntro'))
+
+const pilotWord = {
+  hidden: { opacity: 0.15, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45 } },
+}
 
 function Home() {
+  const [introOpen, setIntroOpen] = useState(false)
+
   return (
+    <MotionConfig reducedMotion="user">
     <>
+      <CinematicOpening />
       <SEO
         title="Vision X | Digital Growth, SEO, AEO, GEO & Creative Technology"
         description="Vision X is a digital growth agency building high-performance websites, SEO, AEO, GEO, performance marketing, creative technology and digital growth systems for ambitious brands."
@@ -25,8 +42,15 @@ function Home() {
         ========================================================= */}
 
         <section
+          onPointerMove={(event) => {
+            if (event.pointerType !== 'mouse') return
+            const bounds = event.currentTarget.getBoundingClientRect()
+            event.currentTarget.style.setProperty('--pointer-x', `${(event.clientX - bounds.left) / bounds.width}`)
+            event.currentTarget.style.setProperty('--pointer-y', `${(event.clientY - bounds.top) / bounds.height}`)
+          }}
           className="
             noise
+            home-hero
             relative
             min-h-[100svh]
             overflow-hidden
@@ -39,12 +63,11 @@ function Home() {
               3D BACKGROUND
           ======================================================= */}
 
-          <div
-            className="pointer-events-none absolute inset-0 z-0"
-            aria-hidden="true"
-          >
-            <HeroScene />
-          </div>
+          <ViewportGate className="home-hero-scene pointer-events-none absolute inset-0 z-0">
+            <Suspense fallback={null}>
+              <HeroScene />
+            </Suspense>
+          </ViewportGate>
 
 
           {/* =======================================================
@@ -53,6 +76,7 @@ function Home() {
 
           <div
             className="
+              home-hero-atmosphere
               pointer-events-none
               absolute
               inset-0
@@ -77,7 +101,7 @@ function Home() {
               absolute
               inset-0
               z-[1]
-              bg-[radial-gradient(circle_at_70%_60%,rgba(124,58,237,0.045),transparent_30%)]
+              bg-[radial-gradient(circle_at_70%_60%,rgba(227,93,115,0.045),transparent_30%)]
             "
           />
 
@@ -103,9 +127,6 @@ function Home() {
           {/* =======================================================
               HERO HUD
           ======================================================= */}
-
-          <HeroHUD />
-
 
           {/* =======================================================
               HERO CONTENT
@@ -138,7 +159,7 @@ function Home() {
                 <div className="flex items-center gap-2">
 
                   <span className="text-[10px] font-semibold uppercase tracking-[0.32em] text-white/65">
-                    Vision X
+                    Vision X Media
                   </span>
 
                   <span className="h-1 w-1 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(103,232,249,0.8)]" />
@@ -148,7 +169,7 @@ function Home() {
                 <span className="h-px w-8 bg-white/20" />
 
                 <span className="text-[9px] uppercase tracking-[0.28em] text-white/30">
-                  Digital Systems Studio
+                  Independent Digital Studio
                 </span>
 
               </div>
@@ -171,7 +192,7 @@ function Home() {
                     text-white/45
                   "
                 >
-                  Digital Growth & Creative Technology
+                  Digital Growth / Creative Technology
                 </p>
 
               </div>
@@ -183,53 +204,29 @@ function Home() {
 
               <h1
                 className="
+                  home-hero-title
                   max-w-5xl
-                  text-[clamp(4rem,10vw,9rem)]
+                  text-[clamp(3rem,6vw,6.4rem)]
                   font-medium
-                  leading-[0.82]
-                  tracking-[-0.075em]
+                  leading-[0.88]
+                  tracking-normal
                 "
               >
 
                 <span className="block text-white">
-                  Build.
+                  BUILD DIGITAL
                 </span>
 
                 <span className="block text-white">
-                  Create.
+                  EXPERIENCES
                 </span>
 
                 <span className="block text-white/25">
-                  Grow.
+                  THAT MOVE
                 </span>
+                <span className="block text-white/35">BRANDS FORWARD.</span>
 
               </h1>
-
-
-              {/* ===================================================
-                  BRAND POSITIONING
-              =================================================== */}
-
-              <div className="mt-7 flex items-center gap-3">
-
-                <Sparkles
-                  size={13}
-                  className="text-cyan-300"
-                />
-
-                <p
-                  className="
-                    text-[9px]
-                    font-medium
-                    uppercase
-                    tracking-[0.32em]
-                    text-white/30
-                  "
-                >
-                  Vision X / Digital systems for ambitious brands
-                </p>
-
-              </div>
 
 
               {/* ===================================================
@@ -257,7 +254,7 @@ function Home() {
                   CTA
               =================================================== */}
 
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
 
                 <Link
                   to="/contact"
@@ -321,39 +318,20 @@ function Home() {
                     hover:text-white
                   "
                 >
-                  View Our Work
+                    Explore Our Work
                 </Link>
 
-              </div>
-
-
-              {/* ===================================================
-                  HERO BRAND SIGNATURE
-              =================================================== */}
-
-              <div className="mt-14 hidden items-center gap-6 md:flex">
-
-                <div className="flex items-center gap-3">
-
-                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.9)]" />
-
-                  <span className="text-[9px] uppercase tracking-[0.3em] text-white/30">
-                    System Online
-                  </span>
-
-                </div>
-
-                <span className="h-3 w-px bg-white/10" />
-
-                <span className="text-[9px] uppercase tracking-[0.3em] text-white/20">
-                  Vision X
-                </span>
-
-                <span className="text-[9px] uppercase tracking-[0.3em] text-white/20">
-                  Strategy × Technology × Growth
-                </span>
+                <button
+                  type="button"
+                  onClick={() => setIntroOpen(true)}
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 px-6 py-4 text-sm font-medium text-white/65 transition-colors hover:border-cyan-100/30 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-200"
+                >
+                  <Play size={15} aria-hidden="true" />
+                  Play Intro
+                </button>
 
               </div>
+
 
             </div>
 
@@ -394,41 +372,6 @@ function Home() {
 
 
           {/* =======================================================
-              BOTTOM RIGHT SYSTEM LABEL
-          ======================================================= */}
-
-          <div
-            className="
-              absolute
-              bottom-8
-              right-8
-              z-10
-              hidden
-              text-right
-              md:block
-            "
-          >
-
-            <p className="text-[10px] uppercase tracking-[0.28em] text-white/20">
-              Strategy
-            </p>
-
-            <p className="mt-1 text-[10px] uppercase tracking-[0.28em] text-white/20">
-              Technology
-            </p>
-
-            <p className="mt-1 text-[10px] uppercase tracking-[0.28em] text-white/20">
-              Intelligence
-            </p>
-
-            <p className="mt-1 text-[10px] uppercase tracking-[0.28em] text-white/20">
-              Growth
-            </p>
-
-          </div>
-
-
-          {/* =======================================================
               HERO BOTTOM VIGNETTE
           ======================================================= */}
 
@@ -449,6 +392,7 @@ function Home() {
 
         </section>
 
+        <VisitorJourney />
 
         {/* =========================================================
             VISION X INTRO
@@ -487,7 +431,7 @@ function Home() {
                       text-white/35
                     "
                   >
-                    Vision X
+                    01 / The Pilot
                   </p>
 
                 </div>
@@ -503,8 +447,13 @@ function Home() {
 
               <div>
 
-                <h2
+                <motion.h2
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.7 }}
+                  variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.055 } } }}
                   className="
+                    pilot-statement
                     max-w-4xl
                     text-3xl
                     font-medium
@@ -513,13 +462,16 @@ function Home() {
                     md:text-5xl
                   "
                 >
-                  We build digital systems that connect
-
-                  <span className="text-white/35">
-                    {' '}
-                    creativity, technology and growth.
-                  </span>
-                </h2>
+                  <motion.span variants={pilotWord}>We </motion.span>
+                  <motion.span variants={pilotWord}>build </motion.span>
+                  <motion.span variants={pilotWord}>digital </motion.span>
+                  <motion.span variants={pilotWord}>systems </motion.span>
+                  <motion.span variants={pilotWord}>that </motion.span>
+                  <motion.span variants={pilotWord}>connect </motion.span>
+                  <motion.span variants={pilotWord} className="text-white">creativity, </motion.span>
+                  <motion.span variants={pilotWord} className="text-white">technology </motion.span>
+                  <motion.span variants={pilotWord} className="text-cyan-100">and growth.</motion.span>
+                </motion.h2>
 
                 <p
                   className="
@@ -550,125 +502,10 @@ function Home() {
         ========================================================= */}
 
         <ServicesShowcase />
-        <IndustriesShowcase />
-
-
-        {/* =========================================================
-            WHY VISION X
-        ========================================================= */}
-
-        <WhyVisionX />
-
-
-        {/* =========================================================
-            SELECTED WORK
-        ========================================================= */}
-
+        <FeaturedCapabilities />
         <SelectedWork />
-
-
-        {/* =========================================================
-            BRAND SIGNATURE
-        ========================================================= */}
-
-        <section
-          className="
-            relative
-            overflow-hidden
-            border-t
-            border-white/10
-            bg-[#050505]
-            px-6
-            py-20
-            md:px-8
-            md:py-24
-          "
-        >
-
-          {/* Background atmosphere */}
-
-          <div
-            className="
-              pointer-events-none
-              absolute
-              right-[-180px]
-              top-1/2
-              h-[400px]
-              w-[400px]
-              -translate-y-1/2
-              rounded-full
-              bg-cyan-400/[0.025]
-              blur-[130px]
-            "
-          />
-
-          <div
-            className="
-              pointer-events-none
-              absolute
-              left-[-180px]
-              top-1/2
-              h-[400px]
-              w-[400px]
-              -translate-y-1/2
-              rounded-full
-              bg-violet-500/[0.02]
-              blur-[130px]
-            "
-          />
-
-
-          <div className="relative mx-auto max-w-7xl">
-
-            <div className="flex flex-col justify-between gap-10 md:flex-row md:items-end">
-
-              <div>
-
-                <div className="flex items-center gap-3">
-
-                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.9)]" />
-
-                  <span className="text-[9px] uppercase tracking-[0.35em] text-white/30">
-                    Vision X
-                  </span>
-
-                </div>
-
-                <h3
-                  className="
-                    mt-5
-                    text-4xl
-                    font-medium
-                    tracking-[-0.055em]
-                    md:text-6xl
-                  "
-                >
-                  Digital systems
-                  <span className="text-white/25">
-                    {' '}for what comes next.
-                  </span>
-                </h3>
-
-              </div>
-
-
-              <div className="max-w-xs">
-
-                <p className="text-sm leading-6 text-white/35">
-                  Strategy. Technology. Creative. Growth.
-                </p>
-
-                <p className="mt-2 text-[9px] uppercase tracking-[0.28em] text-white/20">
-                  Vision X / VX-001
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </section>
+        <IndustriesShowcase />
+        <HomeInsights />
 
 
         {/* =========================================================
@@ -677,6 +514,7 @@ function Home() {
 
         <section
           className="
+            closing-scene
             relative
             overflow-hidden
             border-t
@@ -741,7 +579,7 @@ function Home() {
                     text-white/35
                   "
                 >
-                  Vision X / Final Signal
+                  06 / Final Scene
                 </p>
 
               </div>
@@ -759,12 +597,12 @@ function Home() {
                 "
               >
 
-                Let's build
+                READY TO BUILD
 
                 <br />
 
                 <span className="text-white/30">
-                  something meaningful.
+                  WHAT&apos;S NEXT?
                 </span>
 
               </h2>
@@ -789,12 +627,13 @@ function Home() {
 
               {/* CTA */}
 
-              <div className="mt-10">
+              <div className="mt-10 flex flex-wrap gap-3">
 
                 <Link
                   to="/contact"
                   className="
                     group
+                    vx-magnetic
                     inline-flex
                     items-center
                     gap-3
@@ -828,6 +667,14 @@ function Home() {
                   />
 
                 </Link>
+
+                <a href={`mailto:${PUBLIC_EMAIL}`} className="vx-magnetic inline-flex items-center gap-2 border border-white/15 px-5 py-4 text-sm text-white/75 transition-colors hover:border-white/35 hover:text-white">
+                  <Mail size={16} aria-hidden="true" /> Email Vision X
+                </a>
+
+                <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="vx-magnetic inline-flex items-center gap-2 border border-white/15 px-5 py-4 text-sm text-white/75 transition-colors hover:border-cyan-100/35 hover:text-white">
+                  <MessageCircle size={16} aria-hidden="true" /> WhatsApp
+                </a>
 
               </div>
 
@@ -863,7 +710,14 @@ function Home() {
         </section>
 
       </main>
+
+      {introOpen && (
+        <Suspense fallback={<div className="route-loading" role="status">Opening introduction</div>}>
+          <ExperienceIntro onClose={() => setIntroOpen(false)} />
+        </Suspense>
+      )}
     </>
+    </MotionConfig>
   )
 }
 

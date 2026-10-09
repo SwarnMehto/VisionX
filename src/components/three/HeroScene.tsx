@@ -74,7 +74,7 @@ function DigitalCore() {
           <icosahedronGeometry args={[1, 2]} />
 
           <meshBasicMaterial
-            color="#7c3aed"
+            color="#e35d73"
             wireframe
             transparent
             opacity={0.16}
@@ -120,7 +120,7 @@ function DigitalCore() {
           rotation={[0.5, Math.PI / 3, 0.25]}
         >
           <meshBasicMaterial
-            color="#7c3aed"
+            color="#e35d73"
             transparent
             opacity={0.24}
           />
@@ -171,7 +171,7 @@ function EnergyNodes() {
     },
     {
       position: [-3.4, 1.2, -0.5] as [number, number, number],
-      color: '#7c3aed',
+      color: '#e35d73',
       scale: 0.06,
     },
     {
@@ -216,7 +216,7 @@ function ParticleField() {
   return (
     <>
       <Sparkles
-        count={150}
+        count={90}
         scale={13}
         size={1.25}
         speed={0.22}
@@ -225,7 +225,7 @@ function ParticleField() {
       />
 
       <Sparkles
-        count={70}
+        count={36}
         scale={9}
         size={1.7}
         speed={0.14}
@@ -234,12 +234,12 @@ function ParticleField() {
       />
 
       <Sparkles
-        count={45}
+        count={18}
         scale={7}
         size={1.5}
         speed={0.12}
         opacity={0.20}
-        color="#7c3aed"
+        color="#e35d73"
       />
     </>
   )
@@ -273,11 +273,11 @@ function Scene() {
         distance={12}
       />
 
-      {/* Violet edge light */}
+      {/* Crimson edge light */}
 
       <pointLight
         position={[-4, -1, 3]}
-        color="#7c3aed"
+        color="#e35d73"
         intensity={3.5}
         distance={11}
       />
@@ -311,7 +311,7 @@ function HeroScene() {
           position: [0, 0, 8],
           fov: 43,
         }}
-        dpr={[1, 1.5]}
+        dpr={[1, 1.25]}
         gl={{
           antialias: true,
           alpha: true,

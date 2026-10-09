@@ -71,7 +71,7 @@ function Industries() {
             <div className="max-w-5xl">
 
               <p className="mb-8 text-xs font-medium uppercase tracking-[0.35em] text-white/35">
-                Industries
+                04 / Where We Build
               </p>
 
               <h1 className="text-[clamp(3.8rem,9vw,8.5rem)] font-medium leading-[0.84] tracking-[-0.075em]">

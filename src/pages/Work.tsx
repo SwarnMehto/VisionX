@@ -107,7 +107,7 @@ function Work() {
                 <span className="h-px w-10 bg-white/35" />
 
                 <p className="text-xs font-medium uppercase tracking-[0.35em] text-white/40">
-                  Selected Work
+                  03 / Originals
                 </p>
               </div>
 

@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Menu, ArrowUpRight, X } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const navItems = [
   { label: 'Services', href: '/services' },
@@ -13,11 +13,42 @@ const navItems = [
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [hidden, setHidden] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    let previousY = window.scrollY
+    let frame = 0
+
+    const updateVisibility = () => {
+      const currentY = window.scrollY
+
+      if (Math.abs(currentY - previousY) > 6) {
+        setHidden(currentY > previousY && currentY > 140 && !menuOpen)
+        previousY = currentY
+      }
+
+      frame = 0
+    }
+
+    const handleScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateVisibility)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (frame) window.cancelAnimationFrame(frame)
+    }
+  }, [menuOpen])
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header
+      className="fixed inset-x-0 top-0 z-50 transition-transform duration-500"
+      style={{ transform: hidden ? 'translateY(-120%)' : 'translateY(0)' }}
+    >
       <div className="mx-auto mt-4 w-[calc(100%-28px)] max-w-7xl">
-        <nav className="glass flex h-16 items-center justify-between rounded-full border border-white/10 px-5 md:px-7">
+        <nav aria-label="Main navigation" className="glass flex h-16 items-center justify-between rounded-full border border-white/10 px-5 md:px-7">
 
           {/* Logo */}
           <Link
@@ -39,7 +70,8 @@ function Navbar() {
               <Link
                 key={item.label}
                 to={item.href}
-                className="text-sm font-medium text-white/60 transition-colors duration-300 hover:text-white"
+                aria-current={location.pathname === item.href || location.pathname.startsWith(`${item.href}/`) ? 'page' : undefined}
+                className={`text-sm font-medium transition-colors duration-300 hover:text-white ${location.pathname === item.href || location.pathname.startsWith(`${item.href}/`) ? 'text-white' : 'text-white/60'}`}
               >
                 {item.label}
               </Link>
@@ -66,6 +98,7 @@ function Navbar() {
             type="button"
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
+            aria-controls="mobile-navigation"
             onClick={() => setMenuOpen((value) => !value)}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-colors hover:bg-white/10 md:hidden"
           >
@@ -79,12 +112,13 @@ function Navbar() {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="glass mt-2 overflow-hidden rounded-3xl border border-white/10 p-3 md:hidden">
+          <div id="mobile-navigation" className="glass mt-2 overflow-hidden rounded-3xl border border-white/10 p-3 md:hidden">
 
             {navItems.map((item) => (
               <Link
                 key={item.label}
                 to={item.href}
+                aria-current={location.pathname === item.href || location.pathname.startsWith(`${item.href}/`) ? 'page' : undefined}
                 onClick={() => setMenuOpen(false)}
                 className="block rounded-2xl px-4 py-3.5 text-white/70 transition-all hover:bg-white/5 hover:text-white"
               >
